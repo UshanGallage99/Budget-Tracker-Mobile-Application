@@ -10,20 +10,23 @@ export default class AddExpense extends Component {
             userId: '',
             amount: '',
             note: '',
-            PickerSelectedVal : ''
+            PickerSelectedVal : 'Bills'
         };
       }
     static navigationOptions = {
         title: 'Main',
     };
-
+    componentDidMount() {
+        this.getData()
+    }
     getData = async () => {
         try {
             const isLogedin = await AsyncStorage.getItem('isLogedIn')
             this.state.userId = await AsyncStorage.getItem('userId')
             console.log("isLogedin " + isLogedin);
-            console.log("Active User " + this.state.userId);
+            console.log("Active User " + user);
 
+            this.setState({ userId: user })
         } catch (e) {
             // error reading value
             console.log(e);
@@ -92,6 +95,8 @@ export default class AddExpense extends Component {
                                  borderBottomWidth: 1,
                                  borderBottomColor: '#000'
                              }}
+                             onChangeText={(value) => this.setState({ amount: value })}
+                            value={this.state.amount}
                         >
                         </TextInput>
                     </View>
@@ -118,7 +123,10 @@ export default class AddExpense extends Component {
                                 padding: 10,
                                 borderBottomWidth: 1,
                                 borderBottomColor: '#000',
-                            }}>
+                            }}
+                            onChangeText={(value) => this.setState({ note: value })}
+                            value={this.state.note}
+                            >
                         </TextInput>
                     </View>
                     <View style={{ marginTop: 20, padding: 10, alignItems: 'center' }}>
@@ -176,8 +184,8 @@ export default class AddExpense extends Component {
                          
                      }}
                         selectedValue={this.state.PickerSelectedVal}
-                        onValueChange={(value) => 
-                            this.setState({ PickerSelectedVal: value })
+                        onValueChange={(value) =>
+                         this.setState({ PickerSelectedVal: value })
                         } >                        
                         
                         <Picker.Item label="Bills" value="Bills" />
@@ -219,14 +227,9 @@ export default class AddExpense extends Component {
                         .then((json) => {
                             if (json) {
                                 Alert.alert(
-                                    "Cash Book",
-                                    "Expense Added..!",
+                                     
+                                    "Expense Successfuly Added..!",
                                     [
-                                        {
-                                            text: "Cancel",
-                                            onPress: () => console.log("Cancel Pressed"),
-                                            style: "cancel"
-                                        },
                                         { text: "OK", onPress: () => console.log("Ok Pressed") }
                                     ]
                                 );
@@ -236,8 +239,8 @@ export default class AddExpense extends Component {
                         .catch((error) => {
                             console.log(error);
                             Alert.alert(
-                                "Error..!",
-                                "Please enter Valid Details",
+                                 
+                                "Please enter Valid Details..!",
                                 [
                                     { text: "OK", onPress: () => navigate('AddExpense', { name: 'AddExpense' }) }
                                 ]

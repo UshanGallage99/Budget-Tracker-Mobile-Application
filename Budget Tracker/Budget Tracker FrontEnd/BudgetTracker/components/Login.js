@@ -125,8 +125,8 @@ export default class Login extends Component {
                                     }
                                 })
                                 .catch((error) => {
+                                    console.log(error);
                                     Alert.alert(
-                                        
                                         "Email is not valid, Please Enter valid Email",
                                         [
                                             { text: "OK", onPress: () => navigate('Login', { name: 'Login' }) }

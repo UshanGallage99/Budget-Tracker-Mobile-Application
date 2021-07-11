@@ -9,8 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default class AddIncome extends Component {
     constructor() {
         super();
-         
-
         this.state = {
             userId: '',
             amount: '',
@@ -22,12 +20,17 @@ export default class AddIncome extends Component {
     static navigationOptions = {
         title: 'Main',
     };
+    componentDidMount() {
+        this.getData()
+      }
     getData = async () => {
         try {
             const isLogedin = await AsyncStorage.getItem('isLogedIn')
             this.state.userId = await AsyncStorage.getItem('userId')
             console.log("isLogedin " + isLogedin);
-            console.log("Active User " + this.state.userId);
+            console.log("Active User " + user);
+
+            this.setState({userId : user})
 
         } catch (e) {
             // error reading value
@@ -228,12 +231,7 @@ export default class AddIncome extends Component {
                                      
                                     "Income Successfully Added..!",
                                     [
-                                        {
-                                            text: "Cancel",
-                                            onPress: () => console.log("Cancel"),
-                                            style: "cancel"
-                                        },
-                                        { text: "OK", onPress: () => console.log("Ok") }
+                                        { text: "OK", onPress: () => console.log("Ok Pressed") }
                                     ]
                                 );
                                 this.clearText()

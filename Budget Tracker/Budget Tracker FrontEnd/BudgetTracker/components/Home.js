@@ -192,7 +192,7 @@ export default class Home extends Component {
                </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigate('AddIncome', { name: 'AddIncome' })}
+              onPress={() => navigate('', { name: '' })}
               style={{
                 width: 150,
                 height: 200,
@@ -232,7 +232,7 @@ export default class Home extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigate('AddIncome', { name: 'AddIncome' })}
+              onPress={() => navigate('', { name: '' })}
               style={{
                 width: 150,
                 height: 200,
