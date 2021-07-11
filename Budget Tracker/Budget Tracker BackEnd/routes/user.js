@@ -21,6 +21,7 @@ router.get('/', async(req, res) =>{
         res.send("Error : "+err)
     }
 })
+ 
 
 router.post('/', async (req, res) => {
     const user = new User({

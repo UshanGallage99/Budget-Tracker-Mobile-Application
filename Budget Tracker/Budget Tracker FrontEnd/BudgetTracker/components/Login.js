@@ -108,7 +108,9 @@ export default class Login extends Component {
                                     if (json) {
                                         AsyncStorage.setItem('isLogedIn', "true")
                                         AsyncStorage.setItem('userId', json._id)
+                                        AsyncStorage.setItem('name', json.name)
                                         console.log(json._id);
+                                        console.log(json.name);
                                         navigate('Home', { name: 'Home' })
                                         this.clearText();
                                     } else {

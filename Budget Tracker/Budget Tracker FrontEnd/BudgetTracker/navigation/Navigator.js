@@ -8,7 +8,7 @@ import Home from '../components/Home';
 import AddExpense from '../components/AddExpense';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-import LaunchScreen from '../components/LaunchScreen';
+import Transactions from '../components/Transactions';
 
 
 
@@ -36,6 +36,7 @@ export default function HomeStackNavigator() {
 
             <Stack.Screen name='AddExpense' component={AddExpense} />
 
+            <Stack.Screen name='Transactions' component={Transactions} />
         </Stack.Navigator>
     );
 }

@@ -4,8 +4,21 @@ const Expense = require('../models/ExpenseSchema')
 
 router.get('/',  async(req, res) => {
     try {
-        const allExpense = await Expense.find()
-        res.json(allExpense)
+        const allExpense = await Expense.find({user : req.query.user},{amount:1})
+        let exTotal=0;
+        if(allExpense.length ==0 ){
+            res.json(0);
+        }else{
+            for (const key in allExpense) {
+                if (Object.hasOwnProperty.call(allExpense, key)) {
+                    const element = allExpense[key].amount;
+                    exTotal+=element;
+                }
+            }
+            res.json(exTotal)
+        }
+    
+        console.log(exTotal);
     } catch (err) {
         res.send("Error : " + err)
     }
@@ -23,8 +36,10 @@ router.post('/', async (req, res) => {
     try {
         const ex = await expense.save()
         res.json(ex)
+        console.log(ex);
+        console.log("Expense Added");
     } catch (err) {
-        res.send("Error" + err)
+        
     }
 })
 

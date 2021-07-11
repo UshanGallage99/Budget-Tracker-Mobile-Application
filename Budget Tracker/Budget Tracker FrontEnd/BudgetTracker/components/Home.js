@@ -6,14 +6,40 @@ import { DrawerActions } from '@react-navigation/drawer';
 export default class Home extends Component {
   constructor(props) {
     super(props);
+    this.getData()
     this.state = {
+      userId: '',
+      name:"Ushan",
     };
   }
 
   static navigationOptions = {
     title: ' Main',
   };
+  componentDidMount() {
+    this.getData()
+  }
+  getData = async () => {
+    try {
+      const isLogedin = await AsyncStorage.getItem('isLogedIn')
+      const userId = await AsyncStorage.getItem('userId')
+      const name = await AsyncStorage.getItem('name')
+      console.log("isLogedin " + isLogedin);
+      console.log("Active User " + userId);
+      console.log("Active User " + name);
 
+      if (isLogedin == null) {
+        this.props.navigation.navigate("Login");
+      } else {
+        this.setState({ userId: userId })
+        
+      }
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -44,19 +70,7 @@ export default class Home extends Component {
                     }}
                     source={require('../assests/weather.png')} />
             </TouchableOpacity>
-            {/* <TouchableOpacity
-              style={{
-                borderRadius: 100, borderWidth: 5,
-                borderColor: '#00192D'
-              }}>
-              <Image
-                resizeMode='contain'
-                style={{
-                  height: 35, width: 35,
-                }}
-                source={require('../assests/profile.png')}
-              />
-            </TouchableOpacity> */}
+             
           </View>
         </View>
 
@@ -87,7 +101,7 @@ export default class Home extends Component {
               fontWeight: '600',
             }}
           >
-            Ushan
+            {this.state.name}
           </Text>
           <Text
             style={{
@@ -232,7 +246,7 @@ export default class Home extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigate('', { name: '' })}
+              onPress={() => navigate('Transactions', { name: 'Transactions' })}
               style={{
                 width: 150,
                 height: 200,
@@ -266,9 +280,9 @@ export default class Home extends Component {
                 letterSpacing: 3,
                 position: 'absolute',
                  top:120,
-                 left:45
+                 left:23
               }}>
-                Charts
+                Transactions
               </Text>
             </TouchableOpacity>
           </View>
